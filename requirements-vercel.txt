@@ -1,0 +1,19 @@
+# Core dependencies for Vercel deployment
+# These are production-optimized: large ML models and network-dependent libs are optional
+
+Flask>=3.0
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24
+joblib>=1.3
+tldextract>=5.0
+requests>=2.31
+python-dotenv>=1.0
+
+# Optional but recommended to install for features:
+# langdetect>=1.0.9  # Language detection (small, local)
+# urlextract>=1.9    # URL extraction (small, local)
+
+# NOT recommended for serverless (too large or network-dependent):
+# deep-translator>=1.11  # Translation (network calls)
+# transformers  # Zero-shot model (huge, loads slow)

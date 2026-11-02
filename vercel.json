@@ -1,0 +1,46 @@
+{
+  "buildCommand": "pip install -r requirements.txt --no-cache-dir",
+  "outputDirectory": ".",
+  "framework": "flask",
+  "functions": {
+    "api/**/*.py": {
+      "memory": 3008,
+      "maxDuration": 60,
+      "runtime": "python3.11"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.py"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "FLASK_ENV": "production",
+    "FLASK_DEBUG": "False",
+    "PYTHONUNBUFFERED": "1",
+    "PHISHSHIELD_FEEDBACK_DB": "/tmp/phishshield_feedback.db",
+    "PHISHSHIELD_ENABLE_ZERO_SHOT": "False",
+    "PHISHSHIELD_ENABLE_TRANSLATION": "False",
+    "PHISHSHIELD_MAX_MESSAGE_CHARS": "10000"
+  },
+  "envNotifications": {
+    "THREAT_INTEL_API_URL": "Optional: Set if using threat intelligence API",
+    "PHISHSHIELD_URL_MODEL_PATH": "Optional: Path to URL model file"
+  }
+}
